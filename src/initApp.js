@@ -40,7 +40,7 @@ export const initApp = (app, express) => {
   app.use("/api/v1/user_educations", Routes.userEducationRouter);
   app.use("/api/v1/user_experiences", Routes.userExperienceRouter);
   app.use("/", (req, res) => {
-    res.send("Welcome to Job Portal API");
+    res.send("Welcome to Jobizaa API");
   });
   // Globel Error Handling
   app.use((err, req, res, next) => {
