@@ -11,7 +11,7 @@ const profileRouter = Router();
 profileRouter.get("/", auth(), PC.getProfiles);
 
 // Get Specific Profile
-profileRouter.get("/:id",validation(PV.getProfileValidation), PC.getProfile);
+profileRouter.get("/:id", validation(PV.getProfileValidation), PC.getProfile);
 
 // Create Category
 profileRouter.post(
@@ -32,11 +32,6 @@ profileRouter.patch(
 );
 
 // Delete Skill
-profileRouter.delete(
-  "/:id",
-  auth(),
-  validation(PV.deleteProfileValidation),
-  PC.deleteProfile
-);
+profileRouter.delete("/:id", auth(), validation(PV.deleteProfileValidation), PC.deleteProfile);
 
 export default profileRouter;
