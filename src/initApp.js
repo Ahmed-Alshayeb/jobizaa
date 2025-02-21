@@ -27,6 +27,9 @@ export const initApp = (app, express) => {
   app.use(passport.session());
 
   // Routes
+  app.use("/", (req, res) => {
+    res.send("Welcome to Job Portal API");
+  });
   app.use("/api/v1/jobs", Routes.jobRouter);
   app.use("/api/v1/users", Routes.userRouter);
   app.use("/api/v1/resumes", Routes.resumeRouter);
