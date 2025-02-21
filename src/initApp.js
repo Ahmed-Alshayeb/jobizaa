@@ -27,9 +27,7 @@ export const initApp = (app, express) => {
   app.use(passport.session());
 
   // Routes
-  app.use("/", (req, res) => {
-    res.send("Welcome to Job Portal API");
-  });
+
   app.use("/api/v1/jobs", Routes.jobRouter);
   app.use("/api/v1/users", Routes.userRouter);
   app.use("/api/v1/resumes", Routes.resumeRouter);
@@ -41,7 +39,9 @@ export const initApp = (app, express) => {
   app.use("/api/v1/applications", Routes.applicationRouter);
   app.use("/api/v1/user_educations", Routes.userEducationRouter);
   app.use("/api/v1/user_experiences", Routes.userExperienceRouter);
-
+  app.use("/", (req, res) => {
+    res.send("Welcome to Job Portal API");
+  });
   // Globel Error Handling
   app.use((err, req, res, next) => {
     res.status(err.statusCode).json({
