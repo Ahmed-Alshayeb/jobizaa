@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/api/v1/authenticat/auth/github/callback",
+      callbackURL: "https://jobizaa.vercel.app/api/v1/authenticat/auth/github/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       return done(null, profile);
