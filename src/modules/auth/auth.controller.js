@@ -73,11 +73,11 @@ export const logout = (req, res, next) => {
   });
 };
 
-// ==================== Facebook Auth ====================
 
-// @desc    Facebook login success
-// @route   GET /api/v1/authenticat/auth/success
-export const FBloginSuccess = async (req, res, next) => {
+// ==================== Github Auth ====================
+// @desc    Github login success
+// @route   GET /api/v1/authenticat/auth/github
+export const GH_loginSuccess = async (req, res, next) => {
   const customId = nanoid(8);
   // check if user exist
   const user = await userModel.findOne({ where: { email: req.user._json.email } });
@@ -86,13 +86,13 @@ export const FBloginSuccess = async (req, res, next) => {
       return next(new AppError(400, "user already exist with another provider"));
     }
     // generate token
-    const token = jwt.sign({ id: user.id, email: user.email.toLowerCase() }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
     return res.status(200).json({ msg: "success", token });
   }
 
   //  upload image
   const secure_url = req.user.photos[0].value;
-  const public_id = "facebookImage";
+  const public_id = "githubImage";
   await cloudinary.uploader.upload(secure_url, {
     folder: `Jobizaa/user/profiles/${customId}/image`,
   });
@@ -111,7 +111,7 @@ export const FBloginSuccess = async (req, res, next) => {
   const profile = await profileModel.create({ UserId: newUser.id, secure_url, public_id, customId });
 
   // generate token
-  const token = jwt.sign({ id: newUser.id, email: newUser.email }, process.env.JWT_SECRET);
+  const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET);
   res.status(201).json({ msg: "success", token, user: newUser, profile });
 };
 

@@ -12,6 +12,7 @@ export const systemProviders = {
   system: "system",
   google: "google",
   facebook: "facebook",
+  github: "github",
 };
 
 // job model enums

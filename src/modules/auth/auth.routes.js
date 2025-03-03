@@ -13,7 +13,7 @@ const authRouter = Router();
 
 authRouter.get("/", (req, res) => {
   res.send(
-    "<a href='authenticat/auth/google'>Login with Google</a> <br> <br> <a href='authenticat/auth/facebook'>Login with Facebook</a>"
+    "<a href='authenticat/auth/google'>Login with Google</a> <br> <br>  <a href='authenticat/auth/github'>Login with Github</a> "
   );
 });
 
@@ -38,19 +38,13 @@ authRouter.use("/start", isLoggedIn, AC.loginSuccess);
 
 authRouter.get("/logout", AC.logout);
 
-// ==================== Facebook Auth ====================
+// ==================== Github Auth ====================
+authRouter.get("/auth/github", passport.authenticate("github", { scope: ["user:email"] }));
 
 authRouter.get(
-  "/auth/facebook",
-  passport.authenticate("facebook", {
-    scope: ["email"],
-  })
-);
-
-authRouter.get(
-  "/auth/facebook/callback",
-  passport.authenticate("facebook", { failureRedirect: "/" }),
-  AC.FBloginSuccess
+  "/auth/github/callback",
+  passport.authenticate("github", { failureRedirect: "/" }),
+  AC.GH_loginSuccess
 );
 
 // ==================== System Auth ====================
@@ -77,5 +71,5 @@ authRouter.patch(
   validation(AV.updatePasswordValidation),
   AC.updatePassword
 );
- 
+
 export default authRouter;

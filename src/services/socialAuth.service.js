@@ -2,15 +2,16 @@ import dotenv from "dotenv";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth2";
 import { Strategy as FacebookStrategy } from "passport-facebook";
+import { Strategy as GithubStrategy } from "passport-github2";
 dotenv.config();
 
+// GitHub Strategy
 passport.use(
-  new FacebookStrategy(
+  new GithubStrategy(
     {
-      clientID: process.env.FACEBOOK_APP_ID,
-      clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: "https://jobizaa.vercel.app/api/v1/authenticat/auth/facebook/callback",
-      profileFields: ["id", "displayName", "photos", "email"],
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: "http://localhost:3000/api/v1/authenticat/auth/github/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
       return done(null, profile);
@@ -18,6 +19,7 @@ passport.use(
   )
 );
 
+// Google Strategy
 passport.use(
   new GoogleStrategy(
     {
